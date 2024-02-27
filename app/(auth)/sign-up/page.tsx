@@ -1,25 +1,27 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { FcGoogle } from "react-icons/fc";
-import { FaGithub } from "react-icons/fa";
+import GoogleSignInButton from "@/app/components/GoogleSigninButton";
+import GithubSignInButton from "@/app/components/GithubSigninButton";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/utils/auth";
+import { redirect } from "next/navigation";
 
-export default function Signup() {
+export default async function Signup() {
+  const session = await getServerSession(authOptions);
+
+  if(session) {
+    return redirect("/home")
+  }
   return (
     <div className="mt-24 rounded bg-black/80 py-10 px-6 md:mt-0 md:max-w-sm md:x-14">
-      <form>
+      <form method="post" action="/api/auth/signup">
         <h1 className="text-3xl font-semibold text-white">Sign Up</h1>
         <div className="space-y-4 mt-5">
           <Input 
             type="email" 
             name="email" 
             placeholder="Email" 
-            className="bg-[#333] placeholder:text-xs placeholder:text-gray-400 w-full inline-block" 
-          />
-          <Input 
-            type="password" 
-            name="password" 
-            placeholder="Password" 
             className="bg-[#333] placeholder:text-xs placeholder:text-gray-400 w-full inline-block" 
           />
           <Button
@@ -35,12 +37,8 @@ export default function Signup() {
       </div>
 
       <div className="flex w-full justify-center items-center gap-x-3 mt-6">
-        <Button variant="outline" size="icon">
-          <FcGoogle size={20} />
-        </Button>
-        <Button variant="outline" size="icon">
-          <FaGithub size={20} />
-        </Button>
+        <GoogleSignInButton />
+        <GithubSignInButton />
       </div>
     </div>
   )
