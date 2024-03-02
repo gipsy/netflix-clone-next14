@@ -38,7 +38,7 @@ export default async function MovieVideo() {
         <p className="text-white text-lg mt-5 line-clamp-3">{data?.overview}</p>
         <div className="flex gap-x-3 mt-4">
           <MovieButtons 
-            key={data?.id}
+            key={data?.id as number}
             id={data?.id as number}
             age={data?.age as number}
             duration={data?.duration as number}

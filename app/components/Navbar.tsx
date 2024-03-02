@@ -17,7 +17,7 @@ const links = [
   {name: 'TV Shows', href: '/home/shows'},
   {name: 'Movies', href: '/home/movies'},
   {name: 'Recently Added', href: '/home/recently'},
-  {name: 'My List', href: '/home/list'},
+  {name: 'My List', href: '/home/user/list'},
 ]
 
 export default function Navbar() {

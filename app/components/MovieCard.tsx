@@ -45,7 +45,7 @@ export function MovieCard({
           <form action={deleteFromWatchList}>
             <input type="hidden" name="watchlistId" value={watchListId} />
             <input type="hidden" name="pathname" value={pathName} />
-            <Button onClick={() => setOpen(true)} variant="outline" size="icon">
+            <Button variant="outline" size="icon">
               <Heart className="w-4 h-4 text-red-500" />
             </Button>
           </form>
@@ -54,7 +54,7 @@ export function MovieCard({
             <input type="hidden" name="movieId" value={movieId} />
             <input type="hidden" name="pathname" value={pathName} />
             <Button variant="outline">
-              <Heart className="w-4 h-4 text-red-500" />
+              <Heart className="w-4 h-4" />
             </Button>
           </form>
         )}
