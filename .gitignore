@@ -20,6 +20,8 @@
 # misc
 .DS_Store
 *.pem
+*.backup
+restore.log
 
 # debug
 npm-debug.log*
@@ -32,6 +34,9 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# supabase (local backups + CLI cache)
+supabase/.temp/
 
 # typescript
 *.tsbuildinfo

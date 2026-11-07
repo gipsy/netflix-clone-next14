@@ -20,7 +20,7 @@ Educational full-stack demo that recreates a Netflix-style browsing experience: 
 ## Prerequisites
 
 - Node.js 20+
-- PostgreSQL (e.g. [Supabase](https://supabase.com))
+- PostgreSQL on **[Supabase](https://supabase.com)** (see [docs/SUPABASE-RESTORE.md](./docs/SUPABASE-RESTORE.md) if the database was restored from a dashboard backup)
 - OAuth and/or SMTP credentials as needed
 
 ## Setup
