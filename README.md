@@ -1,10 +1,6 @@
 # Netflix Clone
 
-Educational full-stack demo that recreates a Netflix-style browsing experience: browse movies and TV shows by category, watch trailer modals (YouTube embeds), and maintain a personal watchlist after signing in.
-
-**Stack:** Next.js 16 (App Router), React 19, Tailwind CSS, shadcn/ui, Prisma, PostgreSQL, NextAuth.js (Google, GitHub, email magic links).
-
-> Learning project only—not affiliated with Netflix. Media metadata and posters are sample content for the UI.
+Educational full-stack Netflix-style app: sign in (Google, GitHub, email), browse movies and TV by category, open trailer modals, and keep a watchlist in PostgreSQL. Next.js 16, React 19, Prisma, NextAuth—not affiliated with Netflix.
 
 **Live demo:** [netflix-clone-next14.vercel.app](https://netflix-clone-next14.vercel.app)
 
