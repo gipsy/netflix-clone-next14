@@ -11,6 +11,7 @@
     "start": "next start",
     "lint": "eslint .",
     "check:db": "node scripts/check-database.mjs",
+    "env:vercel": "node scripts/sync-vercel-env.mjs",
     "postinstall": "prisma generate"
   },
   "dependencies": {
