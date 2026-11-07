@@ -1,15 +1,12 @@
 import { MovieCard } from "@/app/components/MovieCard"
 import { authOptions } from "@/app/utils/auth"
+import prisma from "@/app/utils/db"
 import { getServerSession } from "next-auth"
 import Image from "next/image"
-
-interface iMovie {
-
-}
+import { redirect } from "next/navigation"
 
 async function getData(userId: string) {
-  console.log('userId', userId)
-  const data = await prisma?.watchList.findMany({
+  const data = await prisma.watchList.findMany({
     where: {
       userId: userId
     },
@@ -29,14 +26,16 @@ async function getData(userId: string) {
       }
     }
   })
-  console.log('DATA', data)
-
   return data
 }
 
 export default async function WatchList() {
   const session = await getServerSession(authOptions)
-  const data = await getData(session?.user?.email as string)
+  const userId = session?.user?.email
+  if (!userId) {
+    redirect("/login")
+  }
+  const data = await getData(userId)
   return (
     <>
       <h1 className="text-white text-4xl font-bold underline mt-10 px-5 sm:px-0">Your watchlist</h1>

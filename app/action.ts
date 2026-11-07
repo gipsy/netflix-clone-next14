@@ -6,16 +6,22 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "./utils/auth";
 
 export async function addToWatchList(formData: FormData) {
-  "use server";
-
-  const movieId = formData.get("movieId");
-  const pathname = formData.get("pathname") as string;
   const session = await getServerSession(authOptions);
+  const userId = session?.user?.email;
+  if (!userId) {
+    throw new Error("Unauthorized");
+  }
 
-  const data = await prisma.watchList.create({
+  const movieId = Number(formData.get("movieId"));
+  const pathname = formData.get("pathname") as string;
+  if (!movieId || !pathname?.startsWith("/")) {
+    throw new Error("Invalid request");
+  }
+
+  await prisma.watchList.create({
     data: {
-      userId: session?.user?.email as string,
-      movieId: Number(movieId),
+      userId,
+      movieId,
     },
   });
 
@@ -23,16 +29,28 @@ export async function addToWatchList(formData: FormData) {
 }
 
 export async function deleteFromWatchList(formData: FormData) {
-  "use server";
+  const session = await getServerSession(authOptions);
+  const userId = session?.user?.email;
+  if (!userId) {
+    throw new Error("Unauthorized");
+  }
 
   const watchlistId = formData.get("watchlistId") as string;
   const pathname = formData.get("pathname") as string;
+  if (!watchlistId || !pathname?.startsWith("/")) {
+    throw new Error("Invalid request");
+  }
 
-  const data = await prisma.watchList.delete({
+  const deleted = await prisma.watchList.deleteMany({
     where: {
       id: watchlistId,
+      userId,
     },
   });
+
+  if (deleted.count === 0) {
+    throw new Error("Not found");
+  }
 
   revalidatePath(pathname);
 }

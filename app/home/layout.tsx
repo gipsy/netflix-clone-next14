@@ -1,10 +1,11 @@
+import { authOptions } from "@/app/utils/auth"
 import { getServerSession } from "next-auth"
 import { redirect } from "next/navigation"
 import { ReactNode } from "react"
 import Navbar from "../components/Navbar"
 
 export default async function HomeLayout({children}: { children: ReactNode }) {
-  const session = await getServerSession()
+  const session = await getServerSession(authOptions)
 
   if (!session) {
     return redirect("/login")
