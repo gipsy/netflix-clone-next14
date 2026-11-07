@@ -1,9 +1,17 @@
 import { Button } from "@/components/ui/button";
 import prisma from "@/app/utils/db";
+import { notFound } from "next/navigation";
 
 export default function SeedDatabase() {
+  if (process.env.NODE_ENV === "production") {
+    notFound();
+  }
+
   async function postData() {
     "use server";
+    if (process.env.NODE_ENV === "production") {
+      throw new Error("Forbidden");
+    }
     await prisma.movie.createMany({
       data: [
         {

@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Netflix Clone
 
-## Getting Started
+Educational full-stack demo that recreates a Netflix-style browsing experience: browse movies and TV shows by category, watch trailer modals (YouTube embeds), and maintain a personal watchlist after signing in.
 
-First, run the development server:
+**Stack:** Next.js 16 (App Router), React 19, Tailwind CSS, shadcn/ui, Prisma, PostgreSQL, NextAuth.js (Google, GitHub, email magic links).
+
+> Learning project only—not affiliated with Netflix. Media metadata and posters are sample content for the UI.
+
+**Live demo:** [netflix-clone-next14.vercel.app](https://netflix-clone-next14.vercel.app)
+
+## Features
+
+- OAuth and email sign-in (Google, GitHub, SMTP magic links)
+- Proxy-protected `/home` routes (`proxy.ts` + NextAuth)
+- Movie and show catalogs by category
+- Hero video section and trailer modal
+- Per-user watchlist (Server Actions)
+- `/seed` (development only) to load sample titles
+
+## Prerequisites
+
+- Node.js 20+
+- PostgreSQL (e.g. [Supabase](https://supabase.com))
+- OAuth and/or SMTP credentials as needed
+
+## Setup
+
+1. Copy `.env.example` to `.env.local` (or pull from Vercel: `vercel env pull .env.local -p netflix-clone-next14`).
+
+2. Set at least:
+
+   - `DATABASE_URL`
+   - `NEXTAUTH_URL`, `NEXTAUTH_SECRET`
+   - Provider keys (`GITHUB_*`, `GOOGLE_*`, email vars) for the sign-in methods you enable
+
+3. Install and prepare the database:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npx prisma db push
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Scripts
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Dev server ([localhost:3000](http://localhost:3000)) |
+| `npm run build` | Production build |
+| `npm run start` | Run production build |
+| `npm run lint` | ESLint (`eslint.config.mjs`) |
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Unauthenticated users hitting `/` are sent to `/login`; after sign-in they go to `/home`.
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Connect the GitHub repo, set env vars to match `.env.example`, and deploy. Production hides `/seed`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## References
+
+- [Next.js](https://nextjs.org/docs)
+- [Prisma](https://www.prisma.io/docs)
+- [NextAuth.js](https://next-auth.js.org/)

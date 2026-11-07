@@ -87,10 +87,10 @@ async function getData(category: string, userId: string) {
 export default async function CategoryPage({
   params
 }: {
-  params: { genre: string }
+  params: Promise<{ genre: string }>
 }) {
   const session = await getServerSession(authOptions)
-  const { genre } = params
+  const { genre } = await params
 
   const data = await getData(genre, session?.user?.email as string);
 
