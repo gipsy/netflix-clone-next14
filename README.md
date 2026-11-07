@@ -25,7 +25,7 @@ Educational full-stack demo that recreates a Netflix-style browsing experience: 
 
 ## Setup
 
-1. Copy `.env.example` to `.env.local` (or pull from Vercel: `vercel env pull .env.local -p netflix-clone-next14`).
+1. Copy `.env.example` to `.env.local` (or pull from Vercel: `vercel env pull .env.local -p netflix-clone-next14`). After editing locally, push to Vercel: `npm run env:vercel` then redeploy.
 
 2. Set at least:
 
@@ -54,6 +54,13 @@ Unauthenticated users hitting `/` are sent to `/login`; after sign-in they go to
 ## Deploy on Vercel
 
 Connect the GitHub repo, set env vars to match `.env.example`, and deploy. Production hides `/seed`.
+
+**OAuth (production):** set `NEXTAUTH_URL` to your public origin (e.g. `https://netflix-clone-next14.vercel.app`). In [Google Cloud Console](https://console.cloud.google.com/apis/credentials) → your OAuth client → add:
+
+- **Authorized redirect URI:** `https://<your-domain>/api/auth/callback/google`
+- **Authorized JavaScript origin:** `https://<your-domain>`
+
+For GitHub OAuth, set the callback URL to `https://<your-domain>/api/auth/callback/github` in the GitHub app settings.
 
 ## References
 

@@ -6,7 +6,7 @@ import { FcGoogle } from "react-icons/fc"
 
 export default function GoogleSignInButton() {
   return (
-    <Button onClick={() => signIn('google', { callback: '/' })} variant="outline" size="icon">
+    <Button onClick={() => signIn("google", { callbackUrl: "/home" })} variant="outline" size="icon">
       <FcGoogle size={20} />
     </Button>
   )
