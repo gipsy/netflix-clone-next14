@@ -40,8 +40,6 @@ npm install
 npx prisma db push
 ```
 
-If install fails on peer dependencies, use `npm install --legacy-peer-deps` or add a local `.npmrc` with `legacy-peer-deps=true` (not committed; see `.gitignore`).
-
 ## Scripts
 
 | Command | Description |
